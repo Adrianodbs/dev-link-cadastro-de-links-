@@ -1,9 +1,15 @@
-import React from 'react'
+import './login.css'
+import { Logo } from '../../components/Logo'
 
 function Login() {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-container">
+      <Logo />
+      <form className="form">
+        <input type="email" placeholder="Digite o seu email." />
+        <input type="password" placeholder="*******" autoComplete="on" />
+        <button type="submit">Acessar</button>
+      </form>
     </div>
   )
 }
