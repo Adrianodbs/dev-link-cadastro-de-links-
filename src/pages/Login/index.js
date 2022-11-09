@@ -2,14 +2,31 @@ import './login.css'
 import { Logo } from '../../components/Logo'
 import { useState } from 'react'
 
+import { auth } from '../../services/firebaseconnection'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
+
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+
   function handleLogin(e) {
     e.preventDefault()
-    console.log(email)
-    console.log(password)
+
+    if (email === '' || password === '') {
+      alert('Preencha todos os campos')
+      return
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        navigate('/admin', { replace: true })
+      })
+      .catch(() => {
+        console.log('Erro ao tentar acessar')
+      })
   }
 
   return (
