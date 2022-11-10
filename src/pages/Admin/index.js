@@ -1,8 +1,10 @@
-import React from 'react'
+import Header from '../../components/Header'
+import './admin.css'
 
 function Admin() {
   return (
-    <div>
+    <div className="admin-container">
+      <Header />
       <h1>Admin</h1>
     </div>
   )
