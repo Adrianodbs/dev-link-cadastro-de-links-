@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Header from '../../components/Header'
 import './admin.css'
 import { Logo } from '../../components/Logo'
@@ -7,6 +8,11 @@ import { MdAddLink } from 'react-icons/md'
 import { FiTrash2 } from 'react-icons/fi'
 
 function Admin() {
+  const [nameInput, setNameInput] = useState('')
+  const [urlInput, setUrlInput] = useState('')
+  const [backgroundColorInput, setBackgroundColorInput] = useState('#f1f1f1')
+  const [textColorInput, setTextColorInput] = useState('#121212')
+
   return (
     <div className="admin-container">
       <Header />
@@ -14,21 +20,54 @@ function Admin() {
 
       <form className="form">
         <label className="label">Nome do link</label>
-        <Input placeholder="Nome do link" />
+        <Input
+          placeholder="Nome do link"
+          value={nameInput}
+          onChange={e => setNameInput(e.target.value)}
+        />
 
         <label className="label">Url do link</label>
-        <Input placeholder="Digite a URL" type="url" />
+        <Input
+          placeholder="Digite a URL"
+          type="url"
+          value={urlInput}
+          onChange={e => setUrlInput(e.target.value)}
+        />
 
         <section className="container-colors">
           <div>
             <label className="label right">Fundo do link</label>
-            <input type="color" />
+            <input
+              type="color"
+              value={backgroundColorInput}
+              onChange={e => setBackgroundColorInput(e.target.value)}
+            />
           </div>
           <div>
             <label className="label right">Cor do link</label>
-            <input type="color" />
+            <input
+              type="color"
+              value={textColorInput}
+              onChange={e => setTextColorInput(e.target.value)}
+            />
           </div>
         </section>
+
+        {nameInput !== '' && (
+          <div className="preview">
+            <label className="label">Veja como está ficando...</label>
+            <article
+              className="list"
+              style={{
+                margimBottom: 8,
+                marginTop: 8,
+                backgroundColor: backgroundColorInput
+              }}
+            >
+              <p style={{ color: textColorInput }}>{nameInput}</p>
+            </article>
+          </div>
+        )}
 
         <button className="btn-register" type="submit">
           Cadastrar <MdAddLink size={24} color="#fff" />
