@@ -4,6 +4,7 @@
   flex-direction: column;
   min-height: 100vh;
   padding: 0 6px;
+  margin-bottom: 30px;
 }
 
 .label{
@@ -49,6 +50,7 @@
   background-color: rgba(36,36,36, 0.35);
   border-radius: 4px;
   padding: 14px 8px;
+  margin-bottom: 15px;
 }
 
 .preview{
