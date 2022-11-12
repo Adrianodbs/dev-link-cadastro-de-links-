@@ -3,15 +3,33 @@ import Header from '../../components/Header'
 import Input from '../../components/Input'
 
 import { MdAddLink } from 'react-icons/md'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { db } from '../../services/firebaseconnection'
 import { setDoc, doc, getDoc } from 'firebase/firestore'
+
+import { toast } from 'react-toastify'
 
 function Networks() {
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
   const [youtube, setYoutube] = useState('')
+
+  useEffect(() => {
+    function loadLinks() {
+      const docRef = doc(db, 'social', 'link')
+
+      getDoc(docRef).then(snapshot => {
+        if (snapshot.data() !== undefined) {
+          setFacebook(snapshot.data().facebook)
+          setInstagram(snapshot.data().instagram)
+          setYoutube(snapshot.data().youtube)
+        }
+      })
+    }
+
+    loadLinks()
+  }, [])
 
   function handleSave(e) {
     e.preventDefault()
@@ -21,8 +39,12 @@ function Networks() {
       instagram: instagram,
       youtube: youtube
     })
-      .then(() => {})
-      .catch(() => {})
+      .then(() => {
+        toast.success('Salvo com sucesso')
+      })
+      .catch(() => {
+        toast.error('Erro ao salvar')
+      })
   }
 
   return (
